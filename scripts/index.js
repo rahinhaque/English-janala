@@ -10,7 +10,20 @@ const loadLevelWord = (id) => {
     console.log(url);
     fetch(url)
         .then(res => res.json())
-        .then(data => displayLevelWord(data.data))
+        .then(data => {
+            const removeActive=()=>{
+                const lessonButtons = document.querySelectorAll(".lesson-btn")
+                console.log(lessonButtons)
+
+                lessonButtons.forEach((btn)=> btn.classList.remove("active"));
+            }
+            removeActive()
+
+            const clickBtn = document.getElementById(`lesson-level-${id}`)
+            // console.log(clickBtn);
+            clickBtn.classList.add("active");
+             displayLevelWord(data.data)
+        })
 }
 
 
@@ -57,7 +70,7 @@ const displayLevelWord = (words) => {
 
             <div class="font-semibold text-2xl font-bangla">"${word.meaning ? word.meaning : "words not found yet"} / ${word.pronunciation ? word.pronunciation : "words not found"}</div>
             <div class="flex justify-between items-center">
-                <button class="btn bg-[#1A91FF10]  hover:bg-[#1A91FF70]"><i class="fa-solid fa-circle-info"></i></button>
+                <button onClick="my_modal_5.showModal()" class="btn bg-[#1A91FF10]  hover:bg-[#1A91FF70]"><i class="fa-solid fa-circle-info"></i></button>
                 <button class="btn bg-[#1A91FF10]  hover:bg-[#1A91FF70]"><i class="fa-solid fa-volume-high"></i></button>
             </div>
         </div>
@@ -80,7 +93,7 @@ const displaylesson = (lessons) => {
         console.log(lesson)
         const btnDiv = document.createElement('div');
         btnDiv.innerHTML = `
-        <button onclick = "loadLevelWord( ${lesson.level_no})" class="btn btn-outline btn-primary flex items-center">
+        <button id="lesson-level-${lesson.level_no}" onclick = "loadLevelWord( ${lesson.level_no})" class="btn btn-outline btn-primary lesson-btn flex items-center">
         <i class="fa-solid fa-book-open"></i>Lesson - ${lesson.level_no}
         </button>
         
