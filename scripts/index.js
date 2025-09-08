@@ -11,20 +11,22 @@ const loadLevelWord = (id) => {
     fetch(url)
         .then(res => res.json())
         .then(data => {
-            const removeActive=()=>{
+            const removeActive = () => {
                 const lessonButtons = document.querySelectorAll(".lesson-btn")
                 console.log(lessonButtons)
 
-                lessonButtons.forEach((btn)=> btn.classList.remove("active"));
+                lessonButtons.forEach((btn) => btn.classList.remove("active"));
             }
             removeActive()
 
             const clickBtn = document.getElementById(`lesson-level-${id}`)
             // console.log(clickBtn);
             clickBtn.classList.add("active");
-             displayLevelWord(data.data)
+            displayLevelWord(data.data)
         })
 }
+
+
 
 
 
@@ -60,17 +62,17 @@ const displayLevelWord = (words) => {
 
 
     for (let word of words) {
-        console.log(word.word );
+        console.log(word.word);
 
         const card = document.createElement('div');
         card.innerHTML = `
             <div class="bg-white rounded-md shadow-sm text-center py-10 px-5 space-y-5">
-            <h2 class="font-bold text-2xl ">${word.word ? word.word: "Words not found"}</h2>
+            <h2 class="font-bold text-2xl ">${word.word ? word.word : "Words not found"}</h2>
             <p class="font-semibold">Meaning /Pronounciation</p>
 
             <div class="font-semibold text-2xl font-bangla">"${word.meaning ? word.meaning : "words not found yet"} / ${word.pronunciation ? word.pronunciation : "words not found"}</div>
             <div class="flex justify-between items-center">
-                <button onClick="my_modal_5.showModal()" class="btn bg-[#1A91FF10]  hover:bg-[#1A91FF70]"><i class="fa-solid fa-circle-info"></i></button>
+                <button onClick="loadWordDetail(${word.id})" class="btn bg-[#1A91FF10]  hover:bg-[#1A91FF70]"><i class="fa-solid fa-circle-info"></i></button>
                 <button class="btn bg-[#1A91FF10]  hover:bg-[#1A91FF70]"><i class="fa-solid fa-volume-high"></i></button>
             </div>
         </div>
@@ -78,6 +80,69 @@ const displayLevelWord = (words) => {
 
         wordContainer.append(card);
     }
+}
+
+const loadWordDetail = async (id) => {
+    const url = `https://openapi.programming-hero.com/api/word/${id}`
+
+    const res = await fetch(url)
+    const details = await res.json();
+    displayWordsDetails(details.data);
+}
+
+// id
+// : 
+// 3
+// level
+// : 
+// 2
+// meaning
+// : 
+// "সতর্ক"
+// partsOfSpeech
+// : 
+// "adjective"
+// points
+// : 
+// 2
+// pronunciation
+// : 
+// "কশাস"
+// sentence
+// : 
+// "Be cautious while crossing the road."
+// synonyms
+// : 
+// (3) ['careful', 'alert', 'watchful']
+// word
+// : 
+// "Cautious"
+
+
+const displayWordsDetails = (word) => {
+    console.log(word);
+    const detailsBox = document.getElementById('details-container')
+    detailsBox.innerHTML = `
+         <div>
+            <h2 class="text-2xl font-bold">${word.word} ( <i class="fa-solid fa-microphone-lines"></i>:${word.pronunciation})</h2>
+        </div>
+        <div>
+            <h2 class=" font-bold">Meaning</h2>
+            <p>${word.meaning}</p>
+        </div>
+        <div>
+            <h2 class=" font-bold">Example</h2>
+            <p>${word.sentence}</p>
+        </div>
+        <div>
+            <h2 class=" font-bold">Synonymes</h2>
+            <span class="btn">Sync1</span>
+            <span class="btn">Sync1</span>
+            <span class="btn">Sync1</span>
+        </div>
+
+     `
+    document.getElementById('word_modal').showModal();
 }
 
 const displaylesson = (lessons) => {
