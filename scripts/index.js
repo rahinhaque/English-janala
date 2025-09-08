@@ -47,15 +47,15 @@ const displayLevelWord = (words) => {
 
 
     for (let word of words) {
-        console.log(word.word);
+        console.log(word.word );
 
         const card = document.createElement('div');
         card.innerHTML = `
             <div class="bg-white rounded-md shadow-sm text-center py-10 px-5 space-y-5">
-            <h2 class="font-bold text-2xl ">${word.word}</h2>
+            <h2 class="font-bold text-2xl ">${word.word ? word.word: "Words not found"}</h2>
             <p class="font-semibold">Meaning /Pronounciation</p>
 
-            <div class="font-semibold text-2xl font-bangla">"${word.meaning} / ${word.pronunciation}"</div>
+            <div class="font-semibold text-2xl font-bangla">"${word.meaning ? word.meaning : "words not found yet"} / ${word.pronunciation ? word.pronunciation : "words not found"}</div>
             <div class="flex justify-between items-center">
                 <button class="btn bg-[#1A91FF10]  hover:bg-[#1A91FF70]"><i class="fa-solid fa-circle-info"></i></button>
                 <button class="btn bg-[#1A91FF10]  hover:bg-[#1A91FF70]"><i class="fa-solid fa-volume-high"></i></button>
