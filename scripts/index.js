@@ -1,3 +1,25 @@
+const createElement = (arr) => {
+    const htmlElement = arr.map((el) => `<span class="btn">${el}</span>`);
+    return htmlElement.join(" ");
+}
+
+const synonyms = ["Hello", "Hi", "Konnichiwa"];
+createElement(synonyms);
+
+const manageSpinner = (status) => {
+    if(status == true){
+        document.getElementById("spinner").classList.remove("hidden");
+        document.getElementById("word-container").classList.add("hidden");
+    }
+    else{
+        document.getElementById("word-container").classList.remove("hidden");
+        document.getElementById("spinner").classList.add("hidden");
+    }
+}
+
+
+
+
 const loadlesson = () => {
     fetch("https://openapi.programming-hero.com/api/levels/all")
         .then(res => res.json())
@@ -5,6 +27,7 @@ const loadlesson = () => {
 
 }
 const loadLevelWord = (id) => {
+    // manageSpinner(true);
 
     const url = `https://openapi.programming-hero.com/api/level/${id}`
     console.log(url);
@@ -24,6 +47,7 @@ const loadLevelWord = (id) => {
             clickBtn.classList.add("active");
             displayLevelWord(data.data)
         })
+         
 }
 
 
@@ -80,6 +104,8 @@ const displayLevelWord = (words) => {
 
         wordContainer.append(card);
     }
+    
+    
 }
 
 const loadWordDetail = async (id) => {
@@ -136,13 +162,15 @@ const displayWordsDetails = (word) => {
         </div>
         <div>
             <h2 class=" font-bold">Synonymes</h2>
-            <span class="btn">Sync1</span>
-            <span class="btn">Sync1</span>
-            <span class="btn">Sync1</span>
+            <div>
+                ${createElement(word.synonyms)}
+            </div>
         </div>
 
      `
     document.getElementById('word_modal').showModal();
+
+    // 
 }
 
 const displaylesson = (lessons) => {
@@ -175,5 +203,6 @@ const displaylesson = (lessons) => {
 
 
 }
+
 
 loadlesson();
