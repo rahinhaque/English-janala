@@ -1,0 +1,10 @@
+* {
+  poppins {
+    font-family: "Poppins", sans-serif;
+    font-optical-sizing: auto;
+  }
+}
+
+.font-bangla{
+   font-family: "Hind Siliguri", sans-serif;
+}

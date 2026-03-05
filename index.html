@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>English janala || Homepage</title>
+    <title>English janala || Best platform for learning English</title>
     <!-- tailwindcss+DaisyUI -->
     <link
       href="https://cdn.jsdelivr.net/npm/daisyui@5"
@@ -33,18 +33,80 @@
       href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&family=Outfit:wght@100..900&family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap"
       rel="stylesheet"
     />
-
+    <!-- Styling -->
     <style>
-      .outfit {
-        font-family: "Outfit", sans-serif;
+      .poppins {
+        font-family: "Poppins", sans-serif;
         font-optical-sizing: auto;
       }
     </style>
     <link rel="shortcut icon" href="assets/logo.png" type="image/x-icon" />
+    <link rel="stylesheet" href="style/style.css" />
   </head>
 
+  <!-- main codes -->
 
-<body>
-  <h1 class="font-bold text-4xl text-red-200">Hiii</h1>
-</body>
+  <body class="poppins">
+    <header>
+      <div class="navbar bg-base-100 shadow-sm">
+        <div class="w-11/12 mx-auto flex">
+          <div class="navbar-start">
+            <div class="dropdown">
+              <div tabindex="0" role="button" class="btn btn-ghost lg:hidden">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-5 w-5"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M4 6h16M4 12h8m-8 6h16"
+                  />
+                </svg>
+              </div>
+              <ul
+                tabindex="-1"
+                class="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
+              >
+                <li>
+                  <ul class="p-2">
+                    <li><a href="">FAQ</a></li>
+                    <li><a href="">Learn</a></li>
+                    <li><a href="">Logout</a></li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+            <a href="" class="flex items-center gap-1">
+              <span class="font-bold text-sm sm:text-lg">English</span>
+              <img src="assets/logo.png" alt="" class="w-5 h-5 sm:w-8 sm:h-8" />
+              <span class="font-semibold font-bangla text-sm sm:text-lg"
+                >জানালা</span
+              >
+            </a>
+          </div>
+
+          <div class="navbar-end hidden lg:flex">
+            <ul class="menu menu-horizontal px-1 flex gap-3">
+              <a class="btn btn-outline btn-primary" href=""
+                ><span><i class="fa-solid fa-circle-question"></i></span>FAQ</a
+              >
+              <a class="btn btn-outline btn-primary" href=""
+                ><span><i class="fa-brands fa-leanpub"></i></span>Learn</a
+              >
+              <a class="btn btn-outline btn-primary" href=""
+                ><span
+                  ><i class="fa-solid fa-arrow-right-from-bracket"></i></span
+                >Logout</a
+              >
+            </ul>
+          </div>
+        </div>
+      </div>
+    </header>
+  </body>
 </html>
