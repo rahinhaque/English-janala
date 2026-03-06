@@ -8,14 +8,14 @@ const loadLevelWord = (id) => {
   const url = `https://openapi.programming-hero.com/api/level/${id}`;
   fetch(url)
     .then((res) => res.json())
-    .then((data) =>displayLevelWord(data.data));
+    .then((data) => displayLevelWord(data.data));
 };
 
-const displayLevelWord=(words)=>{
- const wordContainer = document.getElementById("word-container");
- wordContainer.innerHTML = "";
- if(words.length == 0){
-  wordContainer.innerHTML = `
+const displayLevelWord = (words) => {
+  const wordContainer = document.getElementById("word-container");
+  wordContainer.innerHTML = "";
+  if (words.length == 0) {
+    wordContainer.innerHTML = `
   
     <div class="text-center col-span-full space-y-5 p-20">
         <img class="mx-auto" src="assets/alert-error.png" alt="">
@@ -24,24 +24,24 @@ const displayLevelWord=(words)=>{
       </div>
   
   `;
-  return;
- }
+    return;
+  }
 
- words.forEach(word => {
-  console.log(word);
-  
-// level: 1;
-// meaning: "আগ্রহী";
-// pronunciation: "ইগার";
-// word: "Eager";
-  const div = document.createElement("div");
-  div.innerHTML = `
+  words.forEach((word) => {
+    console.log(word);
+
+    // level: 1;
+    // meaning: "আগ্রহী";
+    // pronunciation: "ইগার";
+    // word: "Eager";
+    const div = document.createElement("div");
+    div.innerHTML = `
 
    <div class="bg-white rounded-xl shadow-sm text-center space-y-5 px-5 py-10">
-        <h2 class="font-bold text-4xl">${word.word}</h2>
+        <h2 class="font-bold text-4xl">${word.word ? word : "Words not found"}</h2>
         <p class="text-md font-semibold">Meaning /Pronounciation</p>
 
-        <div class="text-2xl">"${word.meaning}/ ${word.pronunciation}"</div>
+        <div class="text-2xl">"${word.meaning ? word.meaning : "Meaning not found"}/ ${word.pronunciation ? word.pronunciation : "Pronunciation not found"}"</div>
 
         <div class="flex justify-between items-center">
 
@@ -54,9 +54,9 @@ const displayLevelWord=(words)=>{
   
   `;
 
-  wordContainer.append(div);
- }) 
-}
+    wordContainer.append(div);
+  });
+};
 
 const displayLessons = (lessons) => {
   const levelContainer = document.getElementById("level-container");
