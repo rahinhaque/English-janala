@@ -24,6 +24,45 @@ const removeActive = () =>{
 
 }
 
+const loadWordDetails=async(id)=>{
+  const url = `https://openapi.programming-hero.com/api/word/${id}`;
+  const res = await fetch(url);
+  const detials = await res.json();
+  displayWordDetails(detials.data);
+}
+const displayWordDetails=(word)=>{
+  const detialsContainer = document.getElementById("details-container");
+  detialsContainer.innerHTML = `
+
+
+    <div class="div bg-gray-900 px-6 py-5">
+    <h2 class="text-2xl font-bold text-white flex items-center gap-2">
+      ${word.word} ( <i class="fa-solid fa-microphone-lines text-orange-400 text-lg"></i> : ${word.pronunciation})
+    </h2>
+  </div>
+
+  <div class="div px-6 py-4 border-b border-gray-100">
+    <h2 class="font-bold text-xs uppercase tracking-widest text-orange-500 mb-1">Meaning</h2>
+    <p class="text-gray-700 text-sm leading-relaxed">${word.meaning}</p>
+  </div>
+
+  <div class="div px-6 py-4 border-b border-gray-100">
+    <h2 class="font-bold text-xs uppercase tracking-widest text-orange-500 mb-1">Example Sentence</h2>
+    <p class="text-gray-700 text-sm leading-relaxed">${word.sentence}</p>
+  </div>
+
+  <div class="div px-6 py-4 flex flex-wrap gap-2 items-center">
+    <h2 class="font-bold text-xs uppercase tracking-widest text-orange-500 w-full mb-1">Synonym</h2>
+    <span class="btn border border-gray-300 text-gray-700 text-sm px-4 py-1.5 rounded-full hover:bg-gray-900 hover:text-white hover:border-gray-900 transition-all cursor-pointer">Sp1</span>
+    <span class="btn border border-gray-300 text-gray-700 text-sm px-4 py-1.5 rounded-full hover:bg-gray-900 hover:text-white hover:border-gray-900 transition-all cursor-pointer">Sp1</span>
+    <span class="btn border border-gray-300 text-gray-700 text-sm px-4 py-1.5 rounded-full hover:bg-gray-900 hover:text-white hover:border-gray-900 transition-all cursor-pointer">Sp1</span>
+  </div>
+
+  
+  `;
+  document.getElementById("my_modal_5").showModal();
+}
+
 const displayLevelWord = (words) => {
   const wordContainer = document.getElementById("word-container");
   wordContainer.innerHTML = "";
@@ -41,7 +80,7 @@ const displayLevelWord = (words) => {
   }
 
   words.forEach((word) => {
-    console.log(word);
+    // console.log(word);
 
     // level: 1;
     // meaning: "আগ্রহী";
@@ -57,8 +96,8 @@ const displayLevelWord = (words) => {
         <div class="text-2xl">"${word.meaning ? word.meaning : "Meaning not found"}/ ${word.pronunciation ? word.pronunciation : "Pronunciation not found"}"</div>
 
         <div class="flex justify-between items-center">
-
-          <button class="btn border border-none bg-slate-200 rounded-md p-2 hover:bg-cyan-200"><i class="fa-solid fa-info"></i></button>
+ 
+          <button onclick="loadWordDetails(${word.id})" class="btn border border-none bg-slate-200 rounded-md p-2 hover:bg-cyan-200"><i class="fa-solid fa-info"></i></button>
           <button class="btn border border-none bg-slate-200 rounded-md p-2 hover:bg-cyan-200"><i class="fa-solid fa-volume-high"></i></button>
 
         </div>
