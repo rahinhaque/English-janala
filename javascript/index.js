@@ -8,8 +8,21 @@ const loadLevelWord = (id) => {
   const url = `https://openapi.programming-hero.com/api/level/${id}`;
   fetch(url)
     .then((res) => res.json())
-    .then((data) => displayLevelWord(data.data));
+    .then((data) => {
+      removeActive();
+      const clickedBtn = document.getElementById(
+        `lesson-btn-${id}`,
+      );
+      clickedBtn.classList.add("active");
+      displayLevelWord(data.data);
+    });
 };
+
+const removeActive = () =>{
+  const lessonButton = document.querySelectorAll(".lesson-btn");
+  lessonButton.forEach(btn=>  btn.classList.remove("active"))
+
+}
 
 const displayLevelWord = (words) => {
   const wordContainer = document.getElementById("word-container");
@@ -38,7 +51,7 @@ const displayLevelWord = (words) => {
     div.innerHTML = `
 
    <div class="bg-white rounded-xl shadow-sm text-center space-y-5 px-5 py-10">
-        <h2 class="font-bold text-4xl">${word.word ? word : "Words not found"}</h2>
+        <h2 class="font-bold text-4xl">${word.word ? word.word : "Words not found"}</h2>
         <p class="text-md font-semibold">Meaning /Pronounciation</p>
 
         <div class="text-2xl">"${word.meaning ? word.meaning : "Meaning not found"}/ ${word.pronunciation ? word.pronunciation : "Pronunciation not found"}"</div>
@@ -64,7 +77,7 @@ const displayLessons = (lessons) => {
 
   for (let lesson of lessons) {
     const div = document.createElement("div");
-    div.innerHTML = `<div onClick="loadLevelWord(${lesson.level_no})" class="flex items-center gap-2 px-5 py-2.5 bg-white border border-gray-200 rounded-full shadow-sm text-sm font-semibold text-gray-700 cursor-pointer hover:shadow-md hover:border-indigo-300 transition-all duration-200"><span class="text-indigo-600 text-base"><i class="fa-brands fa-leanpub"></i></span> Lesson -${lesson.level_no}</div>`;
+    div.innerHTML = `<div id="lesson-btn-${lesson.level_no}" onClick="loadLevelWord(${lesson.level_no})" class="flex lesson-btn items-center gap-2 px-5 py-2.5 bg-white border border-gray-200 rounded-full shadow-sm text-sm font-semibold text-gray-700 cursor-pointer hover:shadow-md hover:border-indigo-300 transition-all duration-200"><span class="text-indigo-600 text-base"><i class="fa-brands fa-leanpub"></i></span> Lesson -${lesson.level_no}</div>`;
 
     levelContainer.appendChild(div);
   }
