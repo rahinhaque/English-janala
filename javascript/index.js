@@ -7,15 +7,14 @@ const createElemen = (arr) => {
 };
 
 const manageSpinner = (status) => {
-  if(status==true){
+  if (status == true) {
     document.getElementById("spinner").classList.remove("hidden");
     document.getElementById("word-container").classList.add("hidden");
-  }else{
-     document.getElementById("spinner").classList.add("hidden");
-     document.getElementById("word-container").classList.remove("hidden");
+  } else {
+    document.getElementById("spinner").classList.add("hidden");
+    document.getElementById("word-container").classList.remove("hidden");
   }
-}
-
+};
 
 const loadLessons = () => {
   fetch("https://openapi.programming-hero.com/api/levels/all")
@@ -85,14 +84,14 @@ const displayLevelWord = (words) => {
   if (words.length == 0) {
     wordContainer.innerHTML = `
   
-    <div class="text-center col-span-full space-y-5 p-20">
-        <img class="mx-auto" src="assets/alert-error.png" alt="">
-        <p class="font-bangla text-gray-400">এই Lesson এ এখনো কোন Vocabulary যুক্ত করা হয়নি।</p>
-        <h2 class="font-bold text-3xl font-bangla">নেক্সট Lesson এ যান</h2>
+    <div class="text-center col-span-full space-y-3 sm:space-y-5 p-6 sm:p-10 lg:p-20">
+        <img class="mx-auto w-16 sm:w-auto" src="assets/alert-error.png" alt="">
+        <p class="font-bangla text-sm sm:text-base text-gray-400">এই Lesson এ এখনো কোন Vocabulary যুক্ত করা হয়নি।</p>
+        <h2 class="font-bold text-xl sm:text-2xl lg:text-3xl font-bangla">নেক্সট Lesson এ যান</h2>
       </div>
   
   `;
-  manageSpinner(false);
+    manageSpinner(false);
     return;
   }
 
@@ -106,11 +105,11 @@ const displayLevelWord = (words) => {
     const div = document.createElement("div");
     div.innerHTML = `
 
-   <div class="bg-white rounded-xl shadow-sm text-center space-y-5 px-5 py-10">
-        <h2 class="font-bold text-4xl">${word.word ? word.word : "Words not found"}</h2>
-        <p class="text-md font-semibold">Meaning /Pronounciation</p>
+   <div class="bg-white rounded-xl shadow-sm text-center space-y-3 sm:space-y-5 px-3 sm:px-5 py-6 sm:py-10">
+        <h2 class="font-bold text-2xl sm:text-3xl lg:text-4xl">${word.word ? word.word : "Words not found"}</h2>
+        <p class="text-sm sm:text-md font-semibold">Meaning /Pronounciation</p>
 
-        <div class="text-2xl">"${word.meaning ? word.meaning : "Meaning not found"}/ ${word.pronunciation ? word.pronunciation : "Pronunciation not found"}"</div>
+        <div class="text-base sm:text-lg lg:text-2xl">"${word.meaning ? word.meaning : "Meaning not found"}/ ${word.pronunciation ? word.pronunciation : "Pronunciation not found"}"</div>
 
         <div class="flex justify-between items-center">
  
