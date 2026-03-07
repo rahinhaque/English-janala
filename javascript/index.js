@@ -1,3 +1,11 @@
+const createElemen = (arr) => {
+  const htmlElements = arr.map(
+    (el) =>
+      `<span class="btn border border-gray-300 text-gray-700 text-sm px-4 py-1.5 rounded-full hover:bg-gray-900 hover:text-white hover:border-gray-900 transition-all cursor-pointer">${el}</span>`,
+  );
+  return htmlElements.join(" ");
+};
+
 const loadLessons = () => {
   fetch("https://openapi.programming-hero.com/api/levels/all")
     .then((res) => res.json())
@@ -10,27 +18,24 @@ const loadLevelWord = (id) => {
     .then((res) => res.json())
     .then((data) => {
       removeActive();
-      const clickedBtn = document.getElementById(
-        `lesson-btn-${id}`,
-      );
+      const clickedBtn = document.getElementById(`lesson-btn-${id}`);
       clickedBtn.classList.add("active");
       displayLevelWord(data.data);
     });
 };
 
-const removeActive = () =>{
+const removeActive = () => {
   const lessonButton = document.querySelectorAll(".lesson-btn");
-  lessonButton.forEach(btn=>  btn.classList.remove("active"))
+  lessonButton.forEach((btn) => btn.classList.remove("active"));
+};
 
-}
-
-const loadWordDetails=async(id)=>{
+const loadWordDetails = async (id) => {
   const url = `https://openapi.programming-hero.com/api/word/${id}`;
   const res = await fetch(url);
   const detials = await res.json();
   displayWordDetails(detials.data);
-}
-const displayWordDetails=(word)=>{
+};
+const displayWordDetails = (word) => {
   const detialsContainer = document.getElementById("details-container");
   detialsContainer.innerHTML = `
 
@@ -53,15 +58,14 @@ const displayWordDetails=(word)=>{
 
   <div class="div px-6 py-4 flex flex-wrap gap-2 items-center">
     <h2 class="font-bold text-xs uppercase tracking-widest text-orange-500 w-full mb-1">Synonym</h2>
-    <span class="btn border border-gray-300 text-gray-700 text-sm px-4 py-1.5 rounded-full hover:bg-gray-900 hover:text-white hover:border-gray-900 transition-all cursor-pointer">Sp1</span>
-    <span class="btn border border-gray-300 text-gray-700 text-sm px-4 py-1.5 rounded-full hover:bg-gray-900 hover:text-white hover:border-gray-900 transition-all cursor-pointer">Sp1</span>
-    <span class="btn border border-gray-300 text-gray-700 text-sm px-4 py-1.5 rounded-full hover:bg-gray-900 hover:text-white hover:border-gray-900 transition-all cursor-pointer">Sp1</span>
+    <span class="btn">${createElemen(word.synonyms)}</span>
+  
   </div>
 
   
   `;
   document.getElementById("my_modal_5").showModal();
-}
+};
 
 const displayLevelWord = (words) => {
   const wordContainer = document.getElementById("word-container");
